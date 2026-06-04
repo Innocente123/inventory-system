@@ -28,21 +28,28 @@
 
             {{-- Login Form --}}
             <div class="login-form-card">
+                {{-- Global errors (login failure) --}}
+                @if($errors->has('login'))
+                    <div class="alert alert-danger">
+                        {{ $errors->first('login') }}
+                    </div>
+                @endif
+
                 <form method="POST" action="{{ route('login') }}">
                     @csrf
 
-                    {{-- Email --}}
+                    {{-- Username --}}
                     <div class="mb-3">
-                        <label for="email" class="form-label text-white">
-                            <i class="fas fa-envelope me-1"></i>Email Address
+                        <label for="username" class="form-label text-white">
+                            <i class="fas fa-user me-1"></i>Username
                         </label>
-                        <input id="email" type="email"
-                               class="form-control auth-input @error('email') is-invalid @enderror"
-                               name="email" value="{{ old('email') }}"
-                               required autocomplete="email" autofocus
-                               placeholder="you@example.com">
-                        @error('email')
-                            <div class="invalid-feedback">{{ $message }}</div>
+                        <input id="username" type="text"
+                               class="form-control auth-input @error('username') is-invalid @enderror"
+                               name="username" value="{{ old('username') }}"
+                               required autocomplete="username" autofocus
+                               placeholder="your username">
+                        @error('username')
+                            <div class="invalid-feedback d-block">{{ $message }}</div>
                         @enderror
                     </div>
 
@@ -56,7 +63,7 @@
                                name="password" required autocomplete="current-password"
                                placeholder="Enter your password">
                         @error('password')
-                            <div class="invalid-feedback">{{ $message }}</div>
+                            <div class="invalid-feedback d-block">{{ $message }}</div>
                         @enderror
                     </div>
 
@@ -74,6 +81,12 @@
                     <button type="submit" class="btn btn-login w-100">
                         <i class="fas fa-arrow-right-to-bracket me-2"></i>Sign In
                     </button>
+
+                    <div class="text-center mt-3">
+                        <p class="text-secondary mb-0">
+                            Don’t have an account? <a href="{{ route('register') }}" class="text-white text-decoration-underline">Register</a>
+                        </p>
+                    </div>
                 </form>
             </div>
 

@@ -21,6 +21,7 @@ class DatabaseSeeder extends Seeder
             ['email' => 'admin@inventory.com'],
             [
                 'name' => 'Admin',
+                'username' => 'admin',
                 'password' => Hash::make('password123'),
                 'role' => User::ROLE_ADMIN,
             ]
@@ -30,6 +31,7 @@ class DatabaseSeeder extends Seeder
             ['email' => 'staff@inventory.com'],
             [
                 'name' => 'Staff User',
+                'username' => 'staff',
                 'password' => Hash::make('password123'),
                 'role' => User::ROLE_STAFF,
             ]

@@ -12,6 +12,8 @@ use Illuminate\Support\Facades\Route;
 Route::middleware('guest')->group(function () {
     Route::get('/login', [AuthController::class, 'showLoginForm'])->name('login');
     Route::post('/login', [AuthController::class, 'login']);
+    Route::get('/register', [AuthController::class, 'showRegisterForm'])->name('register');
+    Route::post('/register', [AuthController::class, 'register']);
 });
 
 // Authenticated routes
@@ -24,13 +26,13 @@ Route::middleware('auth')->group(function () {
     Route::resource('stock-ins', StockInController::class)->only(['index', 'create', 'store', 'show']);
     Route::resource('stock-outs', StockOutController::class)->only(['index', 'create', 'store', 'show']);
 
-    // Staff & Admin: product & supplier views (read-only + create)
+    // Staff & Admin: product & supplier management (read-only + create)
     Route::get('/products', [ProductController::class, 'index'])->name('products.index');
     Route::get('/products/create', [ProductController::class, 'create'])->name('products.create');
     Route::post('/products', [ProductController::class, 'store'])->name('products.store');
-    Route::get('/products/{product}', [ProductController::class, 'show'])->name('products.show');
+    Route::get('/products/{product}', [ProductController::class, 'show'])->name('products.show')->whereNumber('product');
     Route::get('/suppliers', [SupplierController::class, 'index'])->name('suppliers.index');
-    Route::get('/suppliers/{supplier}', [SupplierController::class, 'show'])->name('suppliers.show');
+    Route::get('/suppliers/{supplier}', [SupplierController::class, 'show'])->name('suppliers.show')->whereNumber('supplier');
 
     // Admin only: supplier create, edit & destroy for products and suppliers
     Route::middleware('admin')->group(function () {

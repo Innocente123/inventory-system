@@ -87,7 +87,7 @@
                                             </td>
                                             <td class="text-end">
                                                 <a href="{{ route('stock-ins.create', ['product_id' => $product->product_id]) }}"
-                                                   class="btn btn-sm btn-glass-primary">
+                                                    class="btn btn-sm btn-glass-primary">
                                                     <i class="fas fa-rotate"></i> Restock
                                                 </a>
                                             </td>
@@ -249,14 +249,16 @@
                                 Stock Out
                             </a>
                         </div>
-                        <div class="col-6">
-                            <a href="{{ route('suppliers.create') }}" class="quick-action-btn">
-                                <span class="action-icon">
-                                    <i class="fas fa-user-plus"></i>
-                                </span>
-                                Add Supplier
-                            </a>
-                        </div>
+                        @if(Auth::user()->isAdmin())
+                            <div class="col-6">
+                                <a href="{{ route('suppliers.create') }}" class="quick-action-btn">
+                                    <span class="action-icon">
+                                        <i class="fas fa-user-plus"></i>
+                                    </span>
+                                    Add Supplier
+                                </a>
+                            </div>
+                        @endif
                     </div>
                 </div>
             </div>
